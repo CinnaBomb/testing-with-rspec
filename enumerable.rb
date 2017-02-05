@@ -71,33 +71,6 @@ module Enumerable
 		array
 	end
 
-
-	def my_inject (*args)
-		if args.count ==2
-			accum = args[0]
-			operator = args[1]
-		elsif args.count == 1
-			if args[0].is_a? Symbol
-				operator = args[0]
-			else
-				accum = args[0]
-			end
-		end
-
-		if accum == nil
-			accum = self.shift
-		end
-
-		if block_given?
-			self.my_each {|x| accum = yield(accum, x)}
-		else
-			#Still working out how to use the symbol as an operator
-			#self.my_each {|x| accum.send(operator).x}
-		end
-		accum
-	end
-
-
 	def my_map_with_proc_or_block (proc=false)
 		if proc != false
 			for item in self
@@ -113,8 +86,3 @@ module Enumerable
 
 end
 
-
-
-def multiply_els (array)
-	array.my_inject{|sum, n| sum*n}
-end
